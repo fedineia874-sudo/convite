@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite Luxuoso</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #8fbaf5;
+  font-family: Arial;
+}.scene { perspective: 1200px; width: 100%; display: flex; justify-content: center; }
+
+.envelope { width: 90vw; /* RESPONSIVO */ max-width: 500px; height: auto; aspect-ratio: 16/10; position: relative; transform-style: preserve-3d; cursor: pointer; }
+
+.base { position: absolute; width: 100%; height: 100%; }
+
+.base img { width: 100%; height: 100%; object-fit: cover; border-radius: 12px; box-shadow: 0 25px 60px rgba(0,0,0,0.3); }
+
+.flap { position: absolute; width: 100%; height: 100%; background: rgba(0,0,0,0.05); clip-path: polygon(0 0, 100% 0, 50% 60%); transform-origin: top; transition: transform 1s ease; }
+
+.envelope.open .flap { transform: rotateX(-180deg); }
+
+.card { position: absolute; width: 90%; height: 120%; background: white; left: 5%; top: 10%; border-radius: 10px; box-shadow: 0 20px 50px rgba(0,0,0,0.3); transform: translateY(80px); opacity: 0; transition: all 1s ease; overflow: hidden; }
+
+.envelope.open .card { transform: translateY(-120%); opacity: 1; }
+
+iframe { width: 100%; height: 100%; border: none; pointer-events: none; /* evita popup no mobile */ }
+
+.envelope.open iframe { pointer-events: auto; /* ativa depois de abrir */ }
+
+.hint { position: absolute; bottom: -35px; width: 100%; text-align: center; color: white; font-size: 14px; opacity: 0.9; }
+
+</style>
+</head>
+<body><div class="scene">
+  <div class="envelope" onclick="openEnvelope(this)">
+    <div class="base">
+      <img src="envelope.png" alt="Envelope">
+    </div><div class="flap"></div>
+
+<div class="card" onclick="event.stopPropagation()">
+  <iframe src="convite.pdf"></iframe>
+</div>
+
+<div class="hint">Toque para abrir ✉️</div>
+
+  </div>
+</div><script>
+function openEnvelope(el) {
+  el.classList.toggle('open');
+}
+</script></body>
+</html>
