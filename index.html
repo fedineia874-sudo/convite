@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Convite</title>
+
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(#cfd8e6, #9fb3d1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+/* ENVELOPE */
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background: #dfe6f3;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* ABA (triângulo) */
+.flap {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #cfd8e6;
+  clip-path: polygon(0 0, 50% 60%, 100% 0);
+  transform-origin: top;
+  transition: 0.6s;
+  z-index: 2;
+}
+
+/* CARTA (conteúdo) */
+.letter {
+  position: absolute;
+  bottom: -100%;
+  width: 100%;
+  height: 100%;
+  background: white;
+  transition: 0.6s;
+  z-index: 1;
+}
+
+/* QUANDO ABRE */
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .letter {
+  bottom: 0;
+}
+
+/* PDF */
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="envelope" onclick="abrirEnvelope()">
+  <div class="flap"></div>
+
+  <div class="letter">
+    <iframe src="convite.pdf"></iframe>
+  </div>
+</div>
+
+<script>
+function abrirEnvelope() {
+  document.querySelector(".envelope").classList.toggle("open");
+}
+</script>
+
+</body>
+</html>
