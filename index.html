@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Convite Matheus & Sofia</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #cfd8e3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* FUNDO */
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('fundo.png') no-repeat center/cover;
+  opacity: 0.4;
+  z-index: -1;
+}
+
+/* CONTAINER */
+.container {
+  position: relative;
+  text-align: center;
+}
+
+/* ENVELOPE */
+.envelope {
+  width: 300px;
+  height: 190px;
+  background: linear-gradient(145deg, #bfcddd, #aebfd3);
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+/* ABA */
+.flap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #aebfd3;
+  clip-path: polygon(0 0, 50% 55%, 100% 0);
+  transform-origin: top;
+  transition: transform 1s ease;
+  z-index: 3;
+}
+
+/* LACRE */
+.seal {
+  position: absolute;
+  top: 65px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, gold, #d4af37);
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  letter-spacing: 2px;
+  z-index: 4;
+}
+
+/* FLOR */
+.flower {
+  position: absolute;
+  width: 120px;
+  bottom: -20px;
+  left: -30px;
+}
+
+/* TEXTO */
+.tap-text {
+  margin-top: 12px;
+  font-size: 14px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {opacity: 1;}
+  50% {opacity: 0.3;}
+  100% {opacity: 1;}
+}
+
+/* ABRIR */
+.open .flap {
+  transform: rotateX(180deg);
+}
+
+.open .seal {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.5);
+}
+
+/* CARTÃO (COMEÇA DENTRO) */
+.card {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%) translateY(40px) scale(0.8);
+  width: 300px;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  opacity: 0;
+  transition: all 1s ease;
+  z-index: 1;
+}
+
+/* ANIMAÇÃO SAINDO DO ENVELOPE */
+.envelope.open ~ .card {
+  top: -120px;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50px) scale(1);
+}
+
+/* BOTÕES */
+.btn {
+  display: block;
+  margin-top: 10px;
+  padding: 10px;
+  background: #4a6fa5;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- ENVELOPE -->
+  <div class="envelope" onclick="abrirEnvelope()">
+    <div class="flap"></div>
+    <div class="seal">M S</div>
+    <img src="flor.png" class="flower">
+  </div>
+
+  <div class="tap-text">Toque para abrir</div>
+
+  <!-- CONVITE -->
+  <div class="card">
+    <h3>Matheus & Sofia</h3>
+
+    <p>
+      Não existe felicidade maior do que o encontro de dois corações
+      que há muito tempo se buscavam.
+    </p>
+
+    <p><strong>23 de Maio de 2026 às 19:00h</strong></p>
+
+    <a class="btn" href="convite.pdf" target="_blank">📄 Abrir Convite</a>
+    <a class="btn" href="https://maps.app.goo.gl/XdErUNnhso1R4kvN7" target="_blank">📍 Local</a>
+    <a class="btn" href="https://wa.me/5577999638176" target="_blank">💬 Confirmar</a>
+
+  </div>
+
+</div>
+
+<script>
+function abrirEnvelope() {
+  const envelope = document.querySelector(".envelope");
+  envelope.classList.add("open");
+
+  setTimeout(() => {
+    document.querySelector(".card").style.zIndex = "5";
+  }, 500);
+}
+</script>
+
+</body>
+</html>
